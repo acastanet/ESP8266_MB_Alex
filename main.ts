@@ -72,7 +72,7 @@ namespace ESP8266ThingSpeak {
             basic.pause(100)
             if (thingspeak_connected) {
                 last_upload_successful = true
-                let str: string = "GET /testget/update?api_key=" + write_api_key + "&field1=" + n1 + "&field2=" + n2 + "&field3=" + n3 + "&field4=" + n4 + "&field5=" + n5 + "&field6=" + n6 + "&field7=" + n7 + "&field8=" + n8
+                let str: string = "GET /testget/?api_key=" + write_api_key + "&field1=" + n1 + "&field2=" + n2 + "&field3=" + n3 + "&field4=" + n4 + "&field5=" + n5 + "&field6=" + n6 + "&field7=" + n7 + "&field8=" + n8
                 sendAT("AT+CIPSEND=" + (str.length + 2))
                 sendAT(str, 0) // upload data
                 //last_upload_successful = waitResponse()
