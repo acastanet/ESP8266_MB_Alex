@@ -61,12 +61,12 @@ namespace ESP8266ThingSpeak {
     * Connect to ThingSpeak and upload data. It would not upload anything if it failed to connect to Wifi or ThingSpeak.
     */
     //% block="Upload data to Node-Red|URL/IP = %ip|Write RED key = %write_api_key|Field 1 = %n1|Field 2 = %n2|Field 3 = %n3|Field 4 = %n4|Field 5 = %n5|Field 6 = %n6|Field 7 = %n7|Field 8 = %n8"
-    //% ip.defl=api.thingspeak.com
+    //% ip.defl=5.135.153.79
     //% write_api_key.defl=your_write_api_key
     export function connectThingSpeak(ip: string, write_api_key: string, n1: number, n2: number, n3: number, n4: number, n5: number, n6: number, n7: number, n8: number) {
         if (wifi_connected && write_api_key != "") {
             thingspeak_connected = true
-            sendAT("AT+CIPSTART=\"TCP\",\"" + ip + "\",1880", 0) // connect to website server
+            sendAT("AT+CIPSTART=\"TCP\",\"" + "5.135.153.79" + "\",1880", 0) // connect to website server
             //thingspeak_connected = waitResponse()
             thingspeak_connected = true
             basic.pause(100)
