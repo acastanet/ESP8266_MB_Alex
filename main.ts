@@ -5,8 +5,8 @@
 namespace ESP8266ThingSpeak {
 
     let wifi_connected: boolean = false
-    let thingspeak_connected: boolean = false
-    let last_upload_successful: boolean = false
+    let thingspeak_connected: boolean = true
+    let last_upload_successful: boolean = true
 
     // write AT command with CR+LF ending
     function sendAT(command: string, wait: number = 100) {
@@ -65,13 +65,13 @@ namespace ESP8266ThingSpeak {
     //% write_api_key.defl=your_write_api_key
     export function connectThingSpeak(ip: string, write_api_key: string, n1: number, n2: number, n3: number, n4: number, n5: number, n6: number, n7: number, n8: number) {
         if (wifi_connected && write_api_key != "") {
-            thingspeak_connected = false
-            sendAT("AT+CIPSTART=\"TCP\",\"" + ip + "\",1880", 0) // connect to website server
+            thingspeak_connected = true
+            sendAT("AT+CIPSTART=\"UDP\",\"" + ip + "\",1880", 0) // connect to website server
             //thingspeak_connected = waitResponse()
             thingspeak_connected = true
             basic.pause(100)
             if (thingspeak_connected) {
-                last_upload_successful = false
+                last_upload_successful = true
                 let str: string = "GET /update?api_key=" + write_api_key + "&field1=" + n1 + "&field2=" + n2 + "&field3=" + n3 + "&field4=" + n4 + "&field5=" + n5 + "&field6=" + n6 + "&field7=" + n7 + "&field8=" + n8
                 sendAT("AT+CIPSEND=" + (str.length + 2))
                 sendAT(str, 0) // upload data
